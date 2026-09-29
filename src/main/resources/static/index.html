@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora Fiap & Cia</title>
+</head>
+<body>
+
+<h1> Calculadora XD </h1>
+
+<label> Numero 1: <input type ="number" id ="numero1" ></label>
+<label> Numero 2: <input type ="number" id ="numero2" ></label>
+
+<select id = "operacao">
+
+    <option value ="somar "> Somar </option>
+    <option value ="subtrair "> Subtrair </option>
+    <option value ="Multiplicar "> Multiplicar </option>
+    <option value ="Dividir "> Dividir </option>
+
+</select>
+
+<button onclick ="calcular()"> Calcular </button>
+
+<label> Resultado: <input type ="text" id ="resultado" readonly > </label>
+
+<script>
+
+    async function calcular(){
+
+        const a = document.getElementById("numero1").value
+        const b = document.getElementById("numero2").value
+        const op = document.getElementById("operacao").value
+        const url = `/calculadora/${op}?a=${a}&b=${b}`
+        const resposta = await fetch(url)
+        const campo = document.getElementById("resultado")
+
+        if (resposta.ok){
+
+            campo.value = await resposta.text()
+        }
+        else{
+            campo.value = "erro a executar a operacao"
+        }
+    }
+
+</script>
+
+</body>
+</html>
